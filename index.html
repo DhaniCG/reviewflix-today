@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./assets/reviewflixtoday-favicon.png" type="image/x-icon">
+    <title>ReviewFlix Today</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body,
+        html {
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            height: 100vh;
+        }
+
+        :root {
+            --white: #fff;
+            --green: #00f0c0;
+            --grey: #bdbdbb;
+            --black: #000;
+            --red: #FF0000;
+            --grey-dark: #828282;
+        }
+
+        header {
+            background-color: black;
+        }
+
+        .pd-60 {
+            flex: 1 0 auto;
+            padding: 18px 0;
+        }
+
+        .container {
+            max-width: 1440px;
+            padding: 0 50px;
+            margin: 0 auto;
+        }
+
+        .container.content {
+            height: 100%;
+        }
+
+        img {
+            max-width: 80%;
+            height: auto;
+        }
+
+        .logo {
+            padding: 8px 0;
+            text-align: center;
+        }
+
+        .banner {
+            background-size: cover;
+            text-align: center;
+            position: relative;
+            height: 200px;
+        }
+
+        .banner .banner-heading {
+            color: var(--white);
+            font-size: 48px;
+            line-height: 67px;
+            max-width: 667px;
+            margin: 0 auto;
+            z-index: 10;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .banner .banner-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        /* .banner .banner-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        } */
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        .main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 68px;
+            height: 100%;
+        }
+
+        .main .left {
+            border: 1px solid var(--grey);
+            border-radius: 16px;
+            height: 80%;
+            min-height: 330px;
+        }
+
+        .main .left .box {
+            background-color: var(--red);
+            color: white;
+            padding: 26px;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .main .left .box .box-header>h2 {
+            font-size: 40px;
+        }
+
+        .main .left .box .box-header>p {
+            font-size: 20px;
+        }
+
+        .main .left .question-list,
+        .main .left .question-list .question-item {
+            height: 100%;
+        }
+
+        .main .left .question-list .question-item.start {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .main .left .question-list .question-item .question-name {
+            font-size: 32px;
+            margin-bottom: 32px;
+            text-align: center;
+            margin-top: 50px;
+            padding: 0 16px;
+        }
+
+        .main .left .question-list .question-item .question-actions {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            /* margin-bottom: 50px; */
+        }
+
+        .main .left .question-list .question-item .question-actions .question-btn,
+        .main .left .question-list .question-item .question-actions .question-btn-continue {
+            display: inline-block;
+            width: 260px;
+            max-width: 80%;
+            height: 75px;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            border-radius: 12px;
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--white);
+            background-color: var(--black);
+            transition: 250ms;
+        }
+
+        .main .left .question-list .question-item .question-actions .question-btn-continue:hover {
+            background-color: var(--red);
+        }
+
+        .main .left .question-list .question-item .question-actions .question-btn-yes {
+            margin-right: 15px;
+        }
+
+        .main .right>h3 {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        .main .right>p {
+            font-size: 18px;
+            color: var(--grey-dark);
+            margin-bottom: 40px;
+        }
+
+        .main .right ul {
+            list-style: none;
+        }
+
+        .main .right ul li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .main .right ul li:last-child {
+            margin-bottom: 0;
+        }
+
+        .main .right ul li>img {
+            margin-right: 16px;
+        }
+
+        .footer {
+            padding: 24px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer .footer-copyright {
+            text-align: center;
+        }
+
+        .footer .footer-copyright,
+        .footer .footer-actions .footer-link,
+        .footer .footer-actions p {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .footer .footer-actions .footer-link-terms {
+            border-right: 1px solid var(--black);
+            padding-right: 4px;
+        }
+
+        .footer .footer-actions {
+            display: flex;
+            align-items: center;
+            text-align: center !important;
+            gap: 4px;
+        }
+
+        .footer .footer-actions a {
+            color: var(--black-color);
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .privacy h2 {
+            margin-bottom: 4px;
+        }
+
+        .privacy p {
+            margin-bottom: 24px;
+        }
+
+        .privacy p:last-child {
+            margin-bottom: 0;
+        }
+
+        .privacy ul {
+            padding-left: 50px;
+        }
+
+        .privacy ul li {
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 998px) {
+            .main {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                gap: 30px;
+            }
+
+            .footer {
+                flex-direction: column;
+            }
+
+            .pd-60 {
+                padding-bottom: 28px;
+            }
+
+            .banner {
+                height: auto;
+                padding: 3rem 0;
+            }
+
+            .banner .banner-heading {
+                position: static;
+                max-width: 100%;
+                font-size: 40px;
+                line-height: 1.2;
+                left: 0%;
+                transform: translate(0, 0);
+                padding: 0 2rem;
+            }
+
+            .banner .banner-heading.banner-terms-privacy-heading {
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .container {
+                padding: 0 60px;
+            }
+
+            .footer .footer-copyright {
+                margin-bottom: 8px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .main .left .box .box-header>h2 {
+                font-size: 32px;
+            }
+            
+            .main .left .question-list .question-item .question-name {
+                font-size: 28px;
+            }
+            
+            .main .right>h3 {
+                font-size: 26px;
+            }
+            
+            .footer .footer-actions {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 440px) {
+                .main .left {
+                    height: auto;
+                    min-height: auto;
+                }
+
+                .main .left .question-list .question-item .question-actions {
+                    height: 160px;
+                }
+
+                .main .left .question-list .question-item .question-actions .question-btn, .main .left .question-list .question-item .question-actions .question-btn-continue {
+                    font-size: 24px;
+                    width: 80%;
+                    max-width: 230px;
+                    height: 64px;
+                }
+                
+                .banner {
+                    padding: 1.6rem 0;
+                }
+                
+                .banner .banner-heading {
+                    font-size: 32px;
+                }
+                
+                .main .left .box {
+                    padding: 1rem;
+                }
+                
+                .main .left .box .box-header > h2 {
+                    text-align: center;
+                    font-size: 26px;
+                    line-height: 1.2;
+                }
+                
+                .main .left .box .box-header > p {
+                    text-align: center;
+                    font-size: 16px;
+                }
+
+                .main .right > h3 {
+                    line-height: 1.2;
+                }
+
+                .main .right > p {
+                    font-size: 16px;
+                    line-height: 1.3;
+                }
+
+                .main .right ul li {
+                    line-height: 1.3;
+                    margin-bottom: 12px;
+                }
+
+                .container {
+                    padding: 0 16px;
+                }
+            }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="./assets/reviewflixtoday.png" alt="reviewflixtoday-logo" width="267" height="63" />
+            </div>
+        </div>
+        <div class="banner">
+            <h1 class="banner-heading">
+                Earn While You Watch & Review New Films
+            </h1>
+            <!-- <div class="banner-img">
+                <img src="./assets/transformers-image.jpg" alt="transformers-image" />
+                <span class="overlay"></span> -->
+            </div>
+        </div>
+    </header>
+    <main class="pd-60">
+        <div class="container content">
+            <section class="main">
+                <div class="left">
+                    <div class="question-list">
+                        <div class="question-item start">
+                            <div class="box">
+                                <div class="box-header">
+                                    <h2>GET FREE INFO</h2>
+                                    <p>It takes a few seconds.</p>
+                                </div>
+                            </div>
+                            <!-- <h3 class="question-name"></h3> -->
+                            <div class="question-actions">
+                                <button onclick="reDirect()" class="question-btn-continue">
+                                    Apply Now
+                                </button>
+                            </div>
+
+                        </div>
+                        <div class="question-item hide">
+                            <div class="box">
+                                <div class="box-header">
+                                    <h2>GET FREE INFO</h2>
+                                    <p>It takes a few seconds.</p>
+                                </div>
+                            </div>
+                            <h3 class="question-name">Do you live in the USA?</h3>
+                            <div class="question-actions">
+                                <button class="question-btn question-btn-yes">Yes</button>
+                                <button class="question-btn question-btn-no">No</button>
+                            </div>
+                        </div>
+                        <div class="question-item hide">
+                            <div class="box">
+                                <div class="box-header">
+                                    <h2>GET FREE INFO</h2>
+                                    <p>It takes a few seconds.</p>
+                                </div>
+                            </div>
+                            <h3 class="question-name">
+                                Do you have access to the internet?
+                            </h3>
+                            <div class="question-actions">
+                                <button class="question-btn question-btn-yes">Yes</button>
+                                <button class="question-btn question-btn-no">No</button>
+                            </div>
+                        </div>
+                        <div class="question-item hide">
+                            <div class="box">
+                                <div class="box-header">
+                                    <h2>GOOD JOB!</h2>
+                                    <p>Success! You have completed all questions!</p>
+                                </div>
+                            </div>
+                            <h3 class="question-name">Click the button to continue</h3>
+                            <div class="question-actions">
+                                <button onclick="reDirect()" class="question-btn-continue">
+                                    Continue
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="right">
+                    <h3>Movie studios are looking for film reviewers & taggers!</h3>
+                    <p>Start earning to review & tag the best movies from top streaming platforms</p>
+                    <ul>
+                        <li>
+                            <img src="./assets/check-icon.svg" alt="check-icon" height="22" width="22" />
+                            <span>Review, tag & watch new unreleased movies.</span>
+                        </li>
+                        <li>
+                            <img src="./assets/check-icon.svg" alt="check-icon" height="22" width="22" />
+                            <span>From the comfort of your own home.</span>
+                        </li>
+                        <li>
+                            <img src="./assets/check-icon.svg" alt="check-icon" height="22" width="22" />
+                            <span>All you need is an internet connection.</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="footer">
+                <span class="footer-copyright">© 2023 Review Flix Today / All Rights Reserved</span>
+                <div class="footer-actions">
+                    <a href="./terms-and-conditions.html" class="footer-link footer-link-terms">Terms &
+                        Conditions</a>
+                    <p>
+                        We Believe In Your
+                        <a href="./privacy-policy.html" class="footer-link">
+                            PRIVACY</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        let btnOnQuestion = document.querySelectorAll(".question-btn");
+
+        btnOnQuestion.forEach(function (item, idx) {
+            item.addEventListener("click", function () {
+                currentQuestion = this.parentElement.parentElement;
+                nextQuestion = currentQuestion.nextElementSibling;
+                currentQuestion.classList.toggle("hide");
+                nextQuestion.classList.toggle("hide");
+            });
+        });
+
+        function reDirect() {
+            window.location.href = "https://tapmob.go2cloud.org/aff_c?offer_id=969&aff_id=1&aff_sub2=reviewflixtoday&aff_sub3="
+        }
+    </script>
+</body>
+
+</html>
